@@ -16,7 +16,7 @@
     "sass:lint:fix": "stylelint \"src/scss/**/*.scss\" --fix",
     "start": "npm-run-all --parallel eleventy:dev sass:dev",
     "workspace:start": "cd _site && npx http-server -p 8080 -o _site/ && cd ..",
-    "workspace:dev": "PATH_PREFIX='/proxy/8080/' npm-run-all prod workspace:start",
+    "workspace:dev": "PATH_PREFIX='/' npm-run-all prod workspace:start",
     "markdown:lint": "npx markdownlint-cli \"src/**/*.md\" --config .markdownlint.jsonc",
     "lint:all": "npm-run-all --parallel js:lint sass:lint markdown:lint"
   },
