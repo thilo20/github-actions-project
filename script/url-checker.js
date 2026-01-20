@@ -31,7 +31,7 @@
  * to make sure none return a 404 error. These are markdown pages.
  * 
  * Usage:
- *  node url-checker.js -t <timeout> -p <path>
+ *  node url-checker.js -t <timeout> -d <path>
  * 
  * Options:
  *  -t, --timeout <timeout>  The timeout in seconds for each request. Default is 5000.
