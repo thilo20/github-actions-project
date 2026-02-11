@@ -103,6 +103,9 @@ jobs:
 
   deploy:
     needs: build
+    permissions:
+      id-token: write
+      pages: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -115,3 +118,15 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Create deployment status issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date '+%d %B %Y')
+          STATUS="${{ steps.deployment.outcome == 'success' && 'succeeded' || 'failed' }}"
+          URL="${{ steps.deployment.outputs.page_url }}"
+          gh issue create \
+            --title "$DATE - Deployment: $STATUS" \
+            --body "URL: $URL"
